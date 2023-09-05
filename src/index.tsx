@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Root from './Root';
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -56,8 +56,6 @@ table {
 }
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: ${({ theme }) => theme.basic};
-  color: ${({ theme }) => theme.textColor};
 }
 a {
   text-decoration: none;
@@ -71,6 +69,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <App />
+    <Root />
   </React.StrictMode>
 );
