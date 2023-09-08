@@ -3,7 +3,7 @@ import { schedule } from "../tempData";
 import ScheduleBox from "../components/ScheduleBox";
 import MenuButton from "../components/MenuButton";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -58,9 +58,30 @@ const MenuContainer = styled.button`
     margin-top: 20px;
 `;
 
-const MenuList = styled.div`    
+const MenuList = styled.ul`
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem 0 2rem;
+`;
+
+const MenuListItem = styled.li`
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: ${({theme}) => theme.white};
+    font-size: 1.5rem;
+    transition: font-size 0.5s ease-in-out;
+    font-weight: 300;
+    
+    &:hover {
+        // font-size transition
+        font-size: 1.7rem;
+        transition: font-size 0.5s ease-in-out;
+    }
 `;
 
 function Home() {
@@ -69,6 +90,7 @@ function Home() {
     return (
         <Wrapper>
             <Container animate={{backgroundColor: isOpen ? "#111" : "#fff"}}>
+                {/* Topbar */}
                 <Topbar>
                     <Title animate={{color: isOpen ? "#fff" : "#111"}}>LCG</Title>
                     <MenuContainer onClick={() => setIsOpen(!isOpen)}>
@@ -79,8 +101,14 @@ function Home() {
                     </MenuContainer>
                 </Topbar>
                 {isOpen ?
-                <MenuList></MenuList>
+                // If the menu is open, show the menu list
+                <MenuList>
+                    <MenuListItem>경기 현황</MenuListItem>
+                    <MenuListItem>팀 관리</MenuListItem>
+                    <MenuListItem>일정 관리</MenuListItem>
+                </MenuList>
                 :
+                // If the menu is closed, show the homepage contents
                 <Scroll>
                     <GridContainer>
                         {schedule.map((item, index) => (

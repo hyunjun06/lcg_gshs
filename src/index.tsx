@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Root from './Root';
 import { createGlobalStyle } from "styled-components";
+import firebase from './firebase';
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
