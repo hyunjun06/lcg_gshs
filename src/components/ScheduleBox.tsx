@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ISchedule } from "../data";
 
 const Container = styled.div`
     width: 100%;
@@ -22,10 +23,15 @@ const Data = styled.h2`
     margin-top: 1rem;
 `;
 
-const State = styled.p`
+interface IState {
+    done: boolean;
+}
+
+const State = styled.p<IState>`
     font-size: 1rem;
     font-weight: 300;
     margin-top: 1rem;
+    color: ${props => props.done ? ({theme}) => theme.primary : ({theme}) => theme.black};
 `;
 
 const GradientButtonBackground = styled.div`
@@ -40,6 +46,10 @@ const GradientButtonBackground = styled.div`
     justify-content: center;
     align-items: center;
     padding: 3px 3px 3px 3px;
+    
+    &:hover {
+        transform: scale(1.01);
+    }
 `;
 
 const GradientButton = styled.button`
@@ -68,25 +78,31 @@ const GradientButtonText = styled.p`
     -webkit-text-fill-color: transparent;
 `;
 
-function ScheduleBox({ date, data, state }: ScheduleBoxProps) {
+function ScheduleBox({ schedule }: IScheduleBox) {
     return (
         <Container>
-            <Date>{date}</Date>
-            <Data>{data}</Data>
-            <State>{state ? "진행 완료" : "진행중"}</State>
+            <Date>{schedule.date}</Date>
+            {schedule.state ?
+            <Data>{schedule.winner} WIN</Data>
+            :
+            <Data>{schedule.home} vs {schedule.away}</Data>
+            }
+            <State done={schedule.state}>{schedule.state ? "진행 완료" : "진행중"}</State>
             <GradientButtonBackground>
                 <GradientButton>
+                    {schedule.state ?
+                    <GradientButtonText>경기 결과 수정</GradientButtonText>
+                    :
                     <GradientButtonText>경기 결과 등록</GradientButtonText>
+        }
                 </GradientButton>
             </GradientButtonBackground>
         </Container>
     );
 }
 
-interface ScheduleBoxProps {
-    date: string;
-    data: string;
-    state: boolean;
+interface IScheduleBox {
+    schedule: ISchedule;
 }
 
 export default ScheduleBox;
