@@ -16,12 +16,20 @@ const Date = styled.h1`
     font-size: 3rem;
     font-weight: 300;
     margin-top: 1rem;
+    
+    @media (max-width: 960px) {
+        font-size: 2rem;
+    }
 `;
 
 const Data = styled.h2`
     font-size: 1.5rem;
     font-weight: 900;
     margin-top: 1rem;
+    
+    @media (max-width: 960px) {
+        font-size: 1rem;
+    }
 `;
 
 interface IState {
@@ -77,6 +85,10 @@ const GradientButtonText = styled.p`
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
+    
+    @media (max-width: 960px) {
+        font-size: 0.8rem;
+    }
 `;
 
 function ScheduleBox({ schedule }: IScheduleBox) {

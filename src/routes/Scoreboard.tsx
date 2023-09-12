@@ -2,12 +2,64 @@ import { useEffect, useState } from "react";
 import { ISchedule } from "../data";
 import { collection, getDocs } from "firebase/firestore";
 import { dbService } from "../firebase";
+import { styled } from "styled-components";
 
 interface ITeamScore {
     team: string;
     group: string;
     score: number;
 }
+
+const FullContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const GroupLabel = styled.h1`
+    font-size: 2rem;
+    font-weight: 900;
+    margin-top: 1rem;
+    
+    span {
+        font-weight: 300;
+    }
+`;
+
+const GroupContainer = styled.ul`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: ${({theme}) => theme.black};
+`;
+
+const TeamContainer = styled.li`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background-color: ${({theme}) => theme.black};
+    color: ${({theme}) => theme.white};
+    padding: 1rem 1rem 1rem 1rem;
+    font-weight: 100;
+`;
+
+const TeamLabel = styled.p`
+    font-size: 1rem;
+    font-weight: 600;
+`;
+
+const ScoreLabel = styled.p`
+    font-size: 1rem;
+`;
 
 function Scoreboard() {
 	const [schedules, setSchedules] = useState<ISchedule[]>([]);
@@ -71,19 +123,21 @@ function Scoreboard() {
 	}, []);
 
 	return (
-		<div style={{ width: "100%", height: "100%" }}>
-			<h1>Scoreboard</h1>
+		<FullContainer>
 			{groups.map((group, index) => (
-				<div key={index}>
-					<h2>{group}</h2>
-					<ul>
+				<Container key={index}>
+					<GroupLabel><span>Group-</span>{group}</GroupLabel>
+					<GroupContainer>
                         {teams.filter((team: any) => team.group === group).map((team: any, index: number) => (
-                            <li key={index}>{team.team} : {team.score}</li>
+                            <TeamContainer key={index}>
+                                <TeamLabel>{team.team}</TeamLabel>
+                                <ScoreLabel>{team.score}</ScoreLabel>
+                            </TeamContainer>
                         ))}
-					</ul>
-				</div>
+					</GroupContainer>
+				</Container>
 			))}
-		</div>
+		</FullContainer>
 	);
 }
 

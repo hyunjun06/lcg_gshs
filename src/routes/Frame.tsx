@@ -104,33 +104,34 @@ function Frame() {
         navigate("/");
     }        
     
+    const TopBarComponent = (
+        <Topbar>
+            <Title animate={{color: isOpen ? "#fff" : "#111"}} onClick={onClick}>LCG</Title>
+            <MenuContainer onClick={() => setIsOpen(!isOpen)}>
+                <MenuButton 
+                    isOpen={isOpen}
+                    color={isOpen ? "#fff" : "#111"}
+                />
+            </MenuContainer>
+        </Topbar>
+    );
+
+    const MenuComponent = (
+        <MenuList>
+            <Link to="/" onClick={() => setIsOpen(false)}><MenuListItem>경기 현황</MenuListItem></Link>
+            <Link to="/scoreboard" onClick={() => setIsOpen(false)}><MenuListItem>스코어보드</MenuListItem></Link>
+            <Link to="/schedules" onClick={() => setIsOpen(false)}> <MenuListItem>일정 관리</MenuListItem></Link>
+            <AuthContainer>
+                <AuthButton>관리자 인증</AuthButton>
+            </AuthContainer>
+        </MenuList>
+    );
+    
     return (
         <Wrapper>
             <Container animate={{backgroundColor: isOpen ? "#111" : "#fff"}}>
-                {/* Topbar */}
-                <Topbar>
-                    <Title animate={{color: isOpen ? "#fff" : "#111"}} onClick={onClick}>LCG</Title>
-                    <MenuContainer onClick={() => setIsOpen(!isOpen)}>
-                        <MenuButton 
-                            isOpen={isOpen}
-                            color={isOpen ? "#fff" : "#111"}
-                        />
-                    </MenuContainer>
-                </Topbar>
-                {isOpen ?
-                // If the menu is open, show the menu list
-                <MenuList>
-                    <Link to="/" onClick={() => setIsOpen(false)}><MenuListItem>경기 현황</MenuListItem></Link>
-                    <Link to="/scoreboard" onClick={() => setIsOpen(false)}><MenuListItem>스코어보드</MenuListItem></Link>
-                    <Link to="/schedules" onClick={() => setIsOpen(false)}> <MenuListItem>일정 관리</MenuListItem></Link>
-                    <AuthContainer>
-                        <AuthButton>관리자 인증</AuthButton>
-                    </AuthContainer>
-                </MenuList>
-                :
-                // If the menu is closed, show the homepage contents
-                <Outlet />
-                }    
+                {TopBarComponent}
+                {isOpen ? MenuComponent : <Outlet />}    
             </Container>
         </Wrapper>
     );
