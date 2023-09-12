@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ISchedule } from "../data";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -24,14 +25,14 @@ const Data = styled.h2`
 `;
 
 interface IState {
-    done: boolean;
+    isdone: string;
 }
 
 const State = styled.p<IState>`
     font-size: 1rem;
     font-weight: 300;
     margin-top: 1rem;
-    color: ${props => props.done ? ({theme}) => theme.primary : ({theme}) => theme.black};
+    color: ${props => props.isdone === "true" ? ({theme}) => theme.primary : ({theme}) => theme.black};
 `;
 
 const GradientButtonBackground = styled.div`
@@ -79,6 +80,12 @@ const GradientButtonText = styled.p`
 `;
 
 function ScheduleBox({ schedule }: IScheduleBox) {
+    const navigate = useNavigate();
+    
+    const onClick = () => {
+        navigate(`/update_result/${schedule.id}`);
+    };
+    
     return (
         <Container>
             <Date>{schedule.date}</Date>
@@ -87,9 +94,9 @@ function ScheduleBox({ schedule }: IScheduleBox) {
             :
             <Data>{schedule.home} vs {schedule.away}</Data>
             }
-            <State done={schedule.state}>{schedule.state ? "진행 완료" : "진행중"}</State>
+            <State isdone={schedule.state.toString()}>{schedule.state ? "진행 완료" : "진행중"}</State>
             <GradientButtonBackground>
-                <GradientButton>
+                <GradientButton onClick={onClick}>
                     {schedule.state ?
                     <GradientButtonText>경기 결과 수정</GradientButtonText>
                     :
