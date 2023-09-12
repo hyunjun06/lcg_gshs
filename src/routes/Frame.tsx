@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MenuButton from "../components/MenuButton";
 import { motion } from "framer-motion";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Wrapper = styled.div`
@@ -120,9 +120,9 @@ function Frame() {
                 {isOpen ?
                 // If the menu is open, show the menu list
                 <MenuList>
-                    <a href="/#/" onClick={() => setIsOpen(false)}><MenuListItem>경기 현황</MenuListItem></a>
-                    <a href="/#/scoreboard" onClick={() => setIsOpen(false)}><MenuListItem>스코어보드</MenuListItem></a>
-                    <a href="/#/schedules" onClick={() => setIsOpen(false)}> <MenuListItem>일정 관리</MenuListItem></a>
+                    <Link to="/" onClick={() => setIsOpen(false)}><MenuListItem>경기 현황</MenuListItem></Link>
+                    <Link to="/scoreboard" onClick={() => setIsOpen(false)}><MenuListItem>스코어보드</MenuListItem></Link>
+                    <Link to="/schedules" onClick={() => setIsOpen(false)}> <MenuListItem>일정 관리</MenuListItem></Link>
                     <AuthContainer>
                         <AuthButton>관리자 인증</AuthButton>
                     </AuthContainer>
