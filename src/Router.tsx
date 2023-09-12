@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./routes/Home";
 import Frame from "./routes/Frame";
@@ -6,7 +6,7 @@ import Schedules from "./routes/Schedules";
 import Scoreboard from "./routes/Scoreboard";
 import UpdateResult from "./routes/UpdateResult";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
@@ -35,6 +35,6 @@ const router = createHashRouter([
 			},
 		],
 	},
-]);
+], {basename: "/lcg_gshs"});
 
 export default router;
