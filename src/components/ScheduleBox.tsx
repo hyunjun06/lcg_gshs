@@ -59,6 +59,10 @@ const GradientButtonBackground = styled.div`
     &:hover {
         transform: scale(1.01);
     }
+    
+    @media (max-width: 960px) {
+        height: 2rem;
+    }
 `;
 
 const GradientButton = styled.button`
