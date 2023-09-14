@@ -3,6 +3,7 @@ import { ISchedule } from "../data";
 import { collection, getDocs } from "firebase/firestore";
 import { dbService } from "../firebase";
 import { styled } from "styled-components";
+import { log } from "console";
 
 interface ITeamScore {
     team: string;
@@ -38,10 +39,11 @@ const GroupContainer = styled.ul`
     display: flex;
     flex-direction: column;
     color: ${({theme}) => theme.black};
+    align-items: center;
 `;
 
 const TeamContainer = styled.li`
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -50,15 +52,20 @@ const TeamContainer = styled.li`
     color: ${({theme}) => theme.white};
     padding: 1rem 1rem 1rem 1rem;
     font-weight: 100;
+    transform: skewX(30deg);
 `;
 
 const TeamLabel = styled.p`
     font-size: 1rem;
     font-weight: 600;
+    transform: skewX(-30deg);
+    margin-left: 1rem;
 `;
 
 const ScoreLabel = styled.p`
     font-size: 1rem;
+    transform: skewX(-30deg);
+    margin-right: 1rem;
 `;
 
 function Scoreboard() {
@@ -116,6 +123,7 @@ function Scoreboard() {
         });
                 
         setTeams(uniqueTeams);
+        console.log(uniqueTeams);
 	};
 
 	useEffect(() => {

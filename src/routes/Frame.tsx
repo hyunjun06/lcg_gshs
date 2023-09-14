@@ -57,7 +57,7 @@ const AuthContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: end;
+    align-items: center;
 `;
 
 const AuthButton = styled.button`
